@@ -1,0 +1,63 @@
+components:
+    examples: {}
+    headers: {}
+    parameters: {}
+    requestBodies: {}
+    responses: {}
+    schemas:
+        CardsEntity:
+            properties:
+                id:
+                    type: string
+            required:
+                - id
+            type: object
+            additionalProperties: false
+    securitySchemes:
+        bearerAuth:
+            type: http
+            name: Authorization
+            scheme: bearer
+            in: header
+info:
+    title: node-mariadb-example
+    version: 1.0.0
+    license:
+        name: MIT
+    contact: {}
+openapi: 3.0.0
+paths:
+    /cards:
+        get:
+            operationId: GetCards
+            responses:
+                '200':
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    cards: {items: {$ref: '#/components/schemas/CardsEntity'}, type: array}
+                                required:
+                                    - cards
+                                type: object
+            security: []
+            parameters: []
+        post:
+            operationId: CreateCard
+            responses:
+                '200':
+                    description: Ok
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    newCard: {$ref: '#/components/schemas/CardsEntity'}
+                                required:
+                                    - newCard
+                                type: object
+            security: []
+            parameters: []
+servers:
+    -
+        url: /
