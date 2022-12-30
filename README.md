@@ -4,7 +4,7 @@ Example API using MariaDB as datasource
 # Setup
 
 - Install dependencies:
-```
+```bash
 yarn install
 ```
 
@@ -28,7 +28,7 @@ DB_HOST: 'localhost'
 ```
 
 - Run the application
-```
+```bash
 yarn start:dev
 ```
 
@@ -37,11 +37,17 @@ Then, you will be able to access the local server at http://localhost:3000.
 ## Sample Requests
 
 - Create database register:
-```
+```bash
 curl POST http://localhost:3000/cards
 ```
 
 - List all registers:
-```
+```bash
 curl http://localhost:3000/cards
+```
+
+## Unit Testes
+Use the script `test` to run all unit tests: 
+```bash
+yarn test
 ```
