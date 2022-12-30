@@ -1,0 +1,29 @@
+{
+  "noImplicitAdditionalProperties": "silently-remove-extras",
+  "entryFile": "src/server.ts",
+  "controllerPathGlobs": [
+    "src/**/*controller.ts"
+  ],
+  "spec": {
+    "specMerging": "recursive",
+    "securityDefinitions": {
+      "bearerAuth": {
+        "type": "http",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "in": "header"
+      }
+    },
+    "outputDirectory": ".",
+    "specVersion": 3,
+    "yaml": true
+  },
+  "routes": {
+    "noImplicitAdditionalProperties": "silently-remove-extras",
+    "basePath": "/",
+    "entryFile": "./src/server.ts",
+    "routesDir": "./src",
+    "routesFileName": "routes.ts",
+    "iocModule": "src/ioc"
+  }
+}

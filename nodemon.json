@@ -1,0 +1,10 @@
+{
+  "exec": "yarn dev",
+  "ignore": "src/routes.ts",
+  "delay": "2500",
+  "watch": [
+    "src",
+    "tsoa.json"
+  ],
+  "ext": "ts,yaml"
+}

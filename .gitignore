@@ -2,3 +2,5 @@ src/routes.ts
 dist
 node_modules
 .idea
+coverage
+environment.yaml
