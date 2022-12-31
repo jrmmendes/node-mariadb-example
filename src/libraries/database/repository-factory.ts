@@ -1,7 +1,17 @@
-/* istanbul ignore file */
+import { inject } from "inversify";
+import { EntityTarget, ObjectLiteral, Repository } from "typeorm";
+import { ConfigService } from "../config";
 
-import { Repository } from "./repository";
+export class RepositoryFactory<Entity extends ObjectLiteral> implements RepositoryFactory<Entity> {
 
-export abstract class RepositoryFactory<Entity> {
-  abstract createRepository(...options: unknown[]): Repository<Entity>
+  constructor(
+    @inject(ConfigService)
+    private readonly config: ConfigService
+  ) {
+    this.config = config;
+  }
+
+  createRepository(datasourceName: 'mariadb', target: EntityTarget<Entity>): Repository<Entity> {
+    return this.config.datasources[datasourceName].getRepository(target)
+  }
 }

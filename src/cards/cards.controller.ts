@@ -2,7 +2,7 @@ import { Get, Post, Route } from 'tsoa';
 import { Logger, LoggerFactory } from "../libraries/telemetry";
 import { inject } from "inversify";
 import { CardsEntity } from "./cards.entity";
-import { Repository } from "../libraries/database/repository";
+import { Repository } from "typeorm";
 import { RepositoryFactory } from "../libraries/database/repository-factory";
 
 @Route('cards')
@@ -19,7 +19,7 @@ export class CardsController {
 
   ) {
     this.logger = loggerFactory.createLogger('Controller: Cards');
-    this.repository = repositoryFactory.createRepository(CardsEntity);
+    this.repository = repositoryFactory.createRepository('mariadb', CardsEntity);
   }
 
   @Get()

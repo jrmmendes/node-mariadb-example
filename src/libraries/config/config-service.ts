@@ -4,10 +4,15 @@ import { validateSync, ValidationError } from "class-validator";
 import { Environment } from "./environment";
 import { ConsoleLogger, Logger } from "../telemetry";
 import { ConfigFetcher } from "./fetcher/config-fetcher";
+import { DataSource } from "typeorm";
 
 export class ConfigService {
   private readonly variables: Environment;
   private readonly logger: Logger;
+
+  public readonly datasources: {
+    mariadb: DataSource
+  }
 
   constructor(
     @inject(ConfigFetcher)
@@ -20,6 +25,35 @@ export class ConfigService {
 
     const variables = plainToInstance(Environment, rawVariables);
 
+    this.validate(variables);
+
+    const {
+      DB_HOST: host,
+      DB_PORT: port,
+      DB_USER: username,
+      DB_PASSWORD: password,
+      DB_NAME: database,
+    } = variables;
+
+    this.datasources = {
+      mariadb: new DataSource({
+        type: "mariadb",
+        host,
+        port,
+        username,
+        password,
+        database,
+        entities: ["src/**/*.entity.ts"],
+        migrations: ["src/migrations/*.ts"],
+        poolSize: 5,
+      })
+    };
+
+    this.logger.info('Environment variables validation finished with success')
+    this.variables = variables;
+  }
+
+  private validate(variables: Environment) {
     const validationErrors = validateSync(variables, {
       forbidUnknownValues: true,
     })
@@ -31,8 +65,6 @@ export class ConfigService {
       );
       throw new Error('Invalid environment variables');
     }
-    this.logger.info('Environment variables validation finished with sucess')
-    this.variables = variables;
   }
 
   private formatValidationErrors(errors: ValidationError[]): string {
@@ -43,5 +75,9 @@ export class ConfigService {
 
   get env() {
     return this.variables;
+  }
+
+  get datasourcesList() {
+    return Object.values(this.datasources);
   }
 }
