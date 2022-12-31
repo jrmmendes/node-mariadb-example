@@ -14,7 +14,8 @@
     "typeorm": "typeorm-ts-node-esm",
     "clean": "rimraf dist",
     "migration:run": "typeorm-ts-node-esm migration:run -d src/migrations.config.ts",
-    "migration:revert": "typeorm-ts-node-esm migration:revert -d src/migrations.config.ts"
+    "migration:revert": "typeorm-ts-node-esm migration:revert -d src/migrations.config.ts",
+    "migration:create": "typeorm-ts-node-esm migration:create"
   },
   "dependencies": {
     "@types/jest": "^29.2.4",
