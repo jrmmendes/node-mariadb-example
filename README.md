@@ -12,7 +12,6 @@ yarn install
 ```
 docker compose up
 ```
-> You will need to create the table `cards_entity` on the database manualy, with the field "ID" (it must be of type VARCHAR).
 
 - Create a file named `environment.yaml` at root level:
 ```yaml
@@ -27,7 +26,11 @@ DB_NAME: 'test'
 DB_HOST: 'localhost'
 ```
 
-- Run the application
+- Run database migrations:
+```bash
+yarn migration:run 
+```
+- Start application in development mode:
 ```bash
 yarn start:dev
 ```
