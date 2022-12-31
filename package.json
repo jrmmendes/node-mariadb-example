@@ -11,7 +11,10 @@
     "build:tsoa": "yarn tsoa spec-and-routes",
     "build": "npm run build:routes && tsc && tsc-alias",
     "test": "jest",
-    "clean": "rimraf dist"
+    "typeorm": "typeorm-ts-node-esm",
+    "clean": "rimraf dist",
+    "migration:run": "typeorm-ts-node-esm migration:run -d src/migrations.config.ts",
+    "migration:revert": "typeorm-ts-node-esm migration:revert -d src/migrations.config.ts"
   },
   "dependencies": {
     "@types/jest": "^29.2.4",
@@ -41,6 +44,7 @@
     "@types/jest-when": "^3.5.2",
     "@types/morgan": "^1.9.3",
     "@types/yamljs": "^0.2.31",
-    "jest-when": "^3.5.2"
+    "jest-when": "^3.5.2",
+    "ts-node": "^10.9.1"
   }
 }
