@@ -49,7 +49,7 @@ curl POST http://localhost:3000/cards
 curl http://localhost:3000/cards
 ```
 
-## Unit Testes
+## Unit Tests
 Use the script `test` to run all unit tests: 
 ```bash
 yarn test
